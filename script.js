@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', () => {
-        calculerPourcentage();
-        // Sauvegarde des réponses à chaque changement
-        sauvegarderReponses();
+        // Mettre à jour uniquement si les résultats sont déjà affichés
+        if (localStorage.getItem('kongResultatsAffiches')) {
+          calculerPourcentage();
+          // Sauvegarde des réponses à chaque changement
+          sauvegarderReponses();
+        }
       });
     });
   
@@ -20,6 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
         checkboxes.forEach(checkbox => {
           checkbox.checked = false;
         });
+        calculerPourcentage();
+        sauvegarderReponses();
+      });
+    }
+  
+    // Écouteur d'événement sur le bouton de résultats
+    const resultatButton = document.getElementById('resultatButton');
+    if (resultatButton) {
+      resultatButton.addEventListener('click', () => {
+        // Afficher les résultats et sauvegarder l'indication que les résultats sont affichés
+        localStorage.setItem('kongResultatsAffiches', 'true');
         calculerPourcentage();
         sauvegarderReponses();
       });
@@ -39,40 +53,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const pourcentageGlobal = Math.ceil((totalDeCochees / checkboxes.length) * 100);
   
     const resultatGlobalElement = document.getElementById('resultatGlobal');
-    if (totalDeCochees > 0) {
-      resultatGlobalElement.textContent = `Tu es kong à ${pourcentageGlobal.toFixed(0)}%.`;
+    if (localStorage.getItem('kongResultatsAffiches')) {
+      if (totalDeCochees > 0) {
+        resultatGlobalElement.textContent = `Tu es kong à ${pourcentageGlobal.toFixed(0)}%.`;
   
-      const resultatsCategorieElement = document.getElementById('resultatsCategorie');
-      resultatsCategorieElement.innerHTML = '';
+        const resultatsCategorieElement = document.getElementById('resultatsCategorie');
+        resultatsCategorieElement.innerHTML = '';
   
-      // Trouver les deux catégories principales
-      const nomsCategories = {
-        'A': 'Kong show',
-        'B': 'Kong des cavernes',
-        'C': 'Kong strong',
-        'D': 'Kong beauf',
-        'E': 'Kongpétiteur',
-        'F': 'Mécakong',
-      };
+        // Trouver les deux catégories principales
+        const nomsCategories = {
+          'A': 'Kong show',
+          'B': 'Kong des cavernes',
+          'C': 'Kong strong',
+          'D': 'Kong beauf',
+          'E': 'Kongpétiteur',
+          'F': 'Mécakong',
+        };
   
-      const categoriesTriees = Object.entries(categories).sort((a, b) => b[1] - a[1]);
-      const deuxCategoriesPrincipales = categoriesTriees.slice(0, 2).map(cat => nomsCategories[cat[0]]);
+        const categoriesTriees = Object.entries(categories).sort((a, b) => b[1] - a[1]);
+        const deuxCategoriesPrincipales = categoriesTriees.slice(0, 2).map(cat => nomsCategories[cat[0]]);
   
-      // Afficher les deux catégories principales
-      const phrasePrincipales = document.createElement('p');
-      phrasePrincipales.textContent = `À l'intérieur de toi, il y a deux principaux kongs : ${deuxCategoriesPrincipales.join(' et ')}.`;
-      resultatsCategorieElement.appendChild(phrasePrincipales);
+        // Afficher les deux catégories principales
+        const phrasePrincipales = document.createElement('p');
+        phrasePrincipales.textContent = `À l'intérieur de toi, il y a deux principaux kongs : ${deuxCategoriesPrincipales.join(' et ')}.`;
+        resultatsCategorieElement.appendChild(phrasePrincipales);
   
-      // Afficher le diagramme en cercle
-      afficherDiagramme(categories);
-    } else {
-      resultatGlobalElement.textContent = "Tu n'es pas kong du tout... quel modèle de pureté !";
-      document.getElementById('resultatsCategorie').innerHTML = '';
-      const diagrammeElement = document.getElementById('diagramme');
-      if (diagrammeElement instanceof HTMLCanvasElement) {
-        const context = diagrammeElement.getContext('2d');
-        context.clearRect(0, 0, diagrammeElement.width, diagrammeElement.height);
+        // Afficher le diagramme en cercle
+        afficherDiagramme(categories);
+      } else {
+        resultatGlobalElement.textContent = "Tu n'es pas kong du tout... quel modèle de pureté !";
+        document.getElementById('resultatsCategorie').innerHTML = '';
+        const diagrammeElement = document.getElementById('diagramme');
+        if (diagrammeElement instanceof HTMLCanvasElement) {
+          const context = diagrammeElement.getContext('2d');
+          context.clearRect(0, 0, diagrammeElement.width, diagrammeElement.height);
+        }
       }
+    } else {
+      resultatGlobalElement.textContent = ''; // Effacer le texte si les résultats ne sont pas encore affichés
     }
   }
   
