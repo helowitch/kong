@@ -3,13 +3,12 @@ function calculerPourcentage() {
     const categories = {};
   
     checkboxes.forEach(checkbox => {
-      const categorie = checkbox.getAttribute('data-categorie') || 'PasKong';
+      const categorie = checkbox.getAttribute('data-categorie') || 'Inconnu';
       categories[categorie] = (categories[categorie] || 0) + (checkbox.checked ? 1 : 0);
     });
   
-    const totalDePhrases = checkboxes.length;
     const totalDeCochees = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    const pourcentageGlobal = Math.ceil((totalDeCochees / totalDePhrases) * 100);
+    const pourcentageGlobal = Math.ceil((totalDeCochees / checkboxes.length) * 100);
   
     const resultatGlobalElement = document.getElementById('resultatGlobal');
     if (totalDeCochees > 0) {
@@ -26,11 +25,10 @@ function calculerPourcentage() {
         'D': 'Kong beauf',
         'E': 'Kongpétiteur',
         'F': 'Mécakong',
-        'PasKong': 'Pas kong',
       };
   
       for (const categorie in nomsCategories) {
-        const pourcentageCategorie = Math.ceil((categories[categorie] || 0) / totalDePhrases * 100);
+        const pourcentageCategorie = Math.ceil((categories[categorie] || 0) / totalDeCochees * 100);
         const nomCategorie = nomsCategories[categorie];
         const paragraphe = document.createElement('p');
         paragraphe.textContent = `Tu es ${nomCategorie} à ${pourcentageCategorie.toFixed(0)}%.`;
@@ -86,7 +84,6 @@ function calculerPourcentage() {
       'D': 'Kong beauf',
       'E': 'Kongpétiteur',
       'F': 'Mécakong',
-      'PasKong': 'Pas kong',
     };
   
     return nomsCategories[categorie] || 'Inconnu';
