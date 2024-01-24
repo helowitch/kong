@@ -1,4 +1,32 @@
-function calculerPourcentage() {
+document.addEventListener('DOMContentLoaded', () => {
+    // Chargement des réponses sauvegardées au démarrage de la page
+    chargerReponses();
+  
+    // Écouteur d'événement sur le changement de chaque case à cocher
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        calculerPourcentage();
+        // Sauvegarde des réponses à chaque changement
+        sauvegarderReponses();
+      });
+    });
+  
+    // Écouteur d'événement sur le bouton de réinitialisation
+    const resetButton = document.getElementById('resetButton');
+    if (resetButton) {
+      resetButton.addEventListener('click', () => {
+        // Réinitialisation des réponses et sauvegarde
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = false;
+        });
+        calculerPourcentage();
+        sauvegarderReponses();
+      });
+    }
+  });
+  
+  function calculerPourcentage() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const categories = {};
   
@@ -87,5 +115,32 @@ function calculerPourcentage() {
     };
   
     return nomsCategories[categorie] || 'Inconnu';
+  }
+  
+  function sauvegarderReponses() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const reponses = {};
+  
+    checkboxes.forEach(checkbox => {
+      const id = checkbox.getAttribute('id');
+      reponses[id] = checkbox.checked;
+    });
+  
+    localStorage.setItem('kongReponses', JSON.stringify(reponses));
+  }
+  
+  function chargerReponses() {
+    const reponses = localStorage.getItem('kongReponses');
+  
+    if (reponses) {
+      const reponsesParsed = JSON.parse(reponses);
+  
+      for (const id in reponsesParsed) {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+          checkbox.checked = reponsesParsed[id];
+        }
+      }
+    }
   }
   
