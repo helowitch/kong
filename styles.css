@@ -25,8 +25,9 @@ body {
   }
 
 
-#diagramme {
-    width: 30%; /* Ajuste la largeur selon tes besoins */
+  #diagramme {
+    max-width: 30%; /* Ajuste la largeur selon tes besoins */
+    height: auto; /* Pour maintenir les proportions */
     margin-left: 0; /* Aligné à gauche */
     margin-top: 20px; /* Espacement en haut, ajuste selon tes besoins */
   }
