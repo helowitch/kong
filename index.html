@@ -5,22 +5,32 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Théorie des kongs</title>
+  <link rel="stylesheet" href="styles.css">
   <!-- Ajoute le lien vers Chart.js via CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.js" async></script>
+  <!-- Ajoute le script JavaScript -->
   <script src="script.js"></script>
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Théorie des kongs</h1>
+
+  <!-- Phrases à cocher -->
+  <div>
+    <label for="categorieA"><input type="checkbox" id="categorieA" data-categorie="A"> Catégorie A</label>
+    <label for="categorieB"><input type="checkbox" id="categorieB" data-categorie="B"> Catégorie B</label>
+    <!-- Ajoute d'autres catégories au besoin -->
+  </div>
+
+  <!-- Bouton pour afficher les résultats -->
+  <button onclick="calculerPourcentage()">Afficher les résultats</button>
 
   <!-- Ajoute un paragraphe pour afficher les résultats par catégorie -->
   <div id="resultatsCategorie"></div>
 
   <!-- Ajoute le paragraphe pour afficher le résultat global -->
-  <p id="resultat"></p>
+  <p id="resultatGlobal"></p>
 
   <!-- Ajoute l'élément canvas pour le diagramme -->
   <canvas id="diagramme"></canvas>
-
 </body>
 </html>
