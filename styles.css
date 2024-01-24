@@ -24,8 +24,11 @@ body {
     font-weight: bold;
   }
 
-  #diagramme {
-    width: 200px; /* Ajuste la largeur selon tes besoins */
-    height: 200px; /* Ajuste la hauteur selon tes besoins */
+
+#diagramme {
+    width: 30%; /* Ajuste la largeur selon tes besoins */
+    margin-left: 0; /* Aligné à gauche */
+    margin-top: 20px; /* Espacement en haut, ajuste selon tes besoins */
   }
+  
   
