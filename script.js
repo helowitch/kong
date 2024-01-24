@@ -10,6 +10,17 @@ function calculerPourcentage() {
       }
     });
   
+    // Mapping des catégories à leurs noms respectifs
+    const nomsCategories = {
+      'A': 'Kong show',
+      'B': 'Kong des cavernes',
+      'C': 'Kong strong',
+      'D': 'Kong beauf',
+      'E': 'Kongpétiteur',
+      'F': 'Mécakong',
+      // Ajoute d'autres catégories au besoin
+    };
+  
     // Calculer le pourcentage global
     const totalDePhrases = checkboxes.length;
     const pourcentageGlobal = (Object.keys(categories).length / totalDePhrases) * 100;
@@ -17,7 +28,7 @@ function calculerPourcentage() {
     // Construire le texte résultat global
     const resultatGlobalElement = document.getElementById('resultatGlobal');
     if (Object.keys(categories).length > 0) {
-      resultatGlobalElement.textContent = `Tu es kong à ${pourcentageGlobal.toFixed(2)}%.`;
+      resultatGlobalElement.textContent = `Tu es ${getNomCategorie(Object.keys(categories)[0])} à ${pourcentageGlobal.toFixed(2)}%.`;
     } else {
       resultatGlobalElement.textContent = "Tu n'es pas kong du tout... quel modèle de pureté !";
     }
@@ -27,8 +38,9 @@ function calculerPourcentage() {
     resultatsCategorieElement.innerHTML = '';
     for (const categorie in categories) {
       const pourcentageCategorie = (categories[categorie] / totalDePhrases) * 100;
+      const nomCategorie = getNomCategorie(categorie);
       const paragraphe = document.createElement('p');
-      paragraphe.textContent = `Tu es ${categorie} à ${pourcentageCategorie.toFixed(2)}%.`;
+      paragraphe.textContent = `Tu es ${nomCategorie} à ${pourcentageCategorie.toFixed(2)}%.`;
       resultatsCategorieElement.appendChild(paragraphe);
     }
   
@@ -47,10 +59,10 @@ function calculerPourcentage() {
     
     // Crée un tableau pour stocker les données du diagramme
     const data = {
-      labels: Object.keys(pourcentages),
+      labels: Object.keys(pourcentages).map(categorie => getNomCategorie(categorie)),
       datasets: [{
         data: Object.values(pourcentages),
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', /* ... Ajoute des couleurs ... */],
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF5733', '#9B59B6' /* ... Ajoute des couleurs ... */],
       }],
     };
   
@@ -66,5 +78,20 @@ function calculerPourcentage() {
       data: data,
       options: options,
     });
+  }
+  
+  // Fonction pour obtenir le nom de la catégorie correspondante
+  function getNomCategorie(categorie) {
+    const nomsCategories = {
+      'A': 'Kong show',
+      'B': 'Kong des cavernes',
+      'C': 'Kong strong',
+      'D': 'Kong beauf',
+      'E': 'Kongpétiteur',
+      'F': 'Mécakong',
+      // Ajoute d'autres catégories au besoin
+    };
+  
+    return nomsCategories[categorie] || 'Inconnu';
   }
   
