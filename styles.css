@@ -3,6 +3,10 @@ body {
     margin: 20px;
   }
   
+  input {
+    font-size: 20px;
+  }
+  
   #test-container {
     max-width: 600px;
     margin: 0 auto;
@@ -10,7 +14,7 @@ body {
   
   label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
   
   button {
