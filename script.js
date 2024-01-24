@@ -30,16 +30,12 @@ function calculerPourcentage() {
       const totalCategories = Object.values(categories).reduce((total, valeur) => total + valeur, 0);
   
       for (const categorie in nomsCategories) {
-        const pourcentageCategorie = Math.floor((categories[categorie] || 0) / totalDeCochees * 100);
+        const pourcentageCategorie = Math.floor((categories[categorie] || 0) / totalCategories * 100);
         const nomCategorie = nomsCategories[categorie];
         const paragraphe = document.createElement('p');
         paragraphe.textContent = `Tu es ${nomCategorie} à ${pourcentageCategorie.toFixed(0)}%.`;
         resultatsCategorieElement.appendChild(paragraphe);
       }
-  
-      // Vérifier et ajuster les pourcentages pour assurer le total de 100%
-      const ajustement = 100 - Math.floor(totalCategories / totalDeCochees * 100);
-      categories['A'] += ajustement;
   
       // Afficher le diagramme en cercle
       afficherDiagramme(categories);
