@@ -56,12 +56,15 @@ function calculerPourcentage() {
   const pourcentageGlobal = Math.ceil((totalDeCochees / checkboxes.length) * 100);
 
   const resultatGlobalElement = document.getElementById('resultatGlobal');
+  const resultatsCategorieElement = document.getElementById('resultatsCategorie');
+  
+  // Effacer le texte si les résultats ne sont pas encore affichés
+  resultatGlobalElement.textContent = ''; 
+  resultatsCategorieElement.innerHTML = '';
+
   if (localStorage.getItem('kongResultatsAffiches')) {
     if (totalDeCochees > 0) {
       resultatGlobalElement.textContent = `Tu es kong à ${pourcentageGlobal.toFixed(0)}%.`;
-
-      const resultatsCategorieElement = document.getElementById('resultatsCategorie');
-      resultatsCategorieElement.innerHTML = '';
 
       // Trouver les deux catégories principales
       const nomsCategories = {
@@ -85,15 +88,7 @@ function calculerPourcentage() {
       afficherDiagramme(categories);
     } else {
       resultatGlobalElement.textContent = "Tu n'es pas kong du tout... quel modèle de pureté !";
-      document.getElementById('resultatsCategorie').innerHTML = '';
-      const diagrammeElement = document.getElementById('diagramme');
-      if (diagrammeElement instanceof HTMLCanvasElement) {
-        const context = diagrammeElement.getContext('2d');
-        context.clearRect(0, 0, diagrammeElement.width, diagrammeElement.height);
-      }
     }
-  } else {
-    resultatGlobalElement.textContent = ''; // Effacer le texte si les résultats ne sont pas encore affichés
   }
 }
 
