@@ -10,44 +10,30 @@ function calculerPourcentage() {
       }
     });
   
-    // Calculer le pourcentage par catégorie
+    // Calculer le pourcentage global
     const totalDePhrases = checkboxes.length;
-    const pourcentages = {};
+    const pourcentageGlobal = (Object.keys(categories).length / totalDePhrases) * 100;
   
-    for (const categorie in categories) {
-      const nombreDePhrasesPourCategorie = categories[categorie];
-      const pourcentage = (nombreDePhrasesPourCategorie / totalDePhrases) * 100;
-  
-      // Ajoute uniquement les pourcentages positifs
-      if (pourcentage > 0) {
-        pourcentages[categorie] = pourcentage;
-      }
-    }
-  
-    // Afficher le résultat
-    const resultatElement = document.getElementById('resultat');
-    
-    // Construire le texte résultat en fonction des catégories avec des pourcentages positifs
-    let texteResultat = 'Ton pourcentage est de ';
-    const categoriesPositives = Object.keys(pourcentages);
-  
-    if (categoriesPositives.length > 0) {
-      categoriesPositives.forEach((categorie, index) => {
-        texteResultat += `${pourcentages[categorie].toFixed(2)}% pour la catégorie ${categorie}`;
-        
-        // Ajouter une virgule si ce n'est pas la dernière catégorie
-        if (index < categoriesPositives.length - 1) {
-          texteResultat += ', et ';
-        }
-      });
+    // Construire le texte résultat global
+    const resultatGlobalElement = document.getElementById('resultat');
+    if (Object.keys(categories).length > 0) {
+      resultatGlobalElement.textContent = `Tu es kong à ${pourcentageGlobal.toFixed(2)}%.`;
     } else {
-      texteResultat += '0% pour aucune catégorie';
+      resultatGlobalElement.textContent = "Tu n'es pas kong du tout... quel modèle de pureté !";
     }
   
-    resultatElement.textContent = texteResultat;
+    // Construire le texte résultat par catégorie
+    const resultatsCategorieElement = document.getElementById('resultatsCategorie');
+    resultatsCategorieElement.innerHTML = '';
+    for (const categorie in categories) {
+      const pourcentageCategorie = (categories[categorie] / totalDePhrases) * 100;
+      const paragraphe = document.createElement('p');
+      paragraphe.textContent = `Tu es ${categorie} à ${pourcentageCategorie.toFixed(2)}%.`;
+      resultatsCategorieElement.appendChild(paragraphe);
+    }
   
     // Afficher le diagramme en cercle (ou une liste)
-    afficherDiagramme(pourcentages);
+    afficherDiagramme(categories);
   }
   
   function afficherDiagramme(pourcentages) {
