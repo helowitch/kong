@@ -17,12 +17,34 @@ function calculerPourcentage() {
     for (const categorie in categories) {
       const nombreDePhrasesPourCategorie = categories[categorie];
       const pourcentage = (nombreDePhrasesPourCategorie / totalDePhrases) * 100;
-      pourcentages[categorie] = pourcentage;
+  
+      // Ajoute uniquement les pourcentages positifs
+      if (pourcentage > 0) {
+        pourcentages[categorie] = pourcentage;
+      }
     }
   
     // Afficher le résultat
     const resultatElement = document.getElementById('resultat');
-    resultatElement.textContent = `Ton pourcentage est de ${pourcentages['A']}% pour la catégorie A, et ${pourcentages['B']}% pour la catégorie B, etc.`;
+    
+    // Construire le texte résultat en fonction des catégories avec des pourcentages positifs
+    let texteResultat = 'Ton pourcentage est de ';
+    const categoriesPositives = Object.keys(pourcentages);
+  
+    if (categoriesPositives.length > 0) {
+      categoriesPositives.forEach((categorie, index) => {
+        texteResultat += `${pourcentages[categorie].toFixed(2)}% pour la catégorie ${categorie}`;
+        
+        // Ajouter une virgule si ce n'est pas la dernière catégorie
+        if (index < categoriesPositives.length - 1) {
+          texteResultat += ', et ';
+        }
+      });
+    } else {
+      texteResultat += '0% pour aucune catégorie';
+    }
+  
+    resultatElement.textContent = texteResultat;
   
     // Afficher le diagramme en cercle (ou une liste)
     afficherDiagramme(pourcentages);
