@@ -3,17 +3,17 @@ function calculerPourcentage() {
     const categories = {};
   
     checkboxes.forEach(checkbox => {
-      const categorie = checkbox.getAttribute('data-categorie');
-      categories[categorie] = (categories[categorie] || 0) + 1;
+      const categorie = checkbox.getAttribute('data-categorie') || 'PasKong';
+      categories[categorie] = (categories[categorie] || 0) + (checkbox.checked ? 1 : 0);
     });
   
     const totalDePhrases = checkboxes.length;
     const totalDeCochees = document.querySelectorAll('input[type="checkbox"]:checked').length;
-    const pourcentageGlobal = (totalDeCochees / totalDePhrases) * 100;
+    const pourcentageGlobal = Math.ceil((totalDeCochees / totalDePhrases) * 100);
   
     const resultatGlobalElement = document.getElementById('resultatGlobal');
     if (totalDeCochees > 0) {
-      resultatGlobalElement.textContent = `Tu es kong à ${pourcentageGlobal.toFixed(2)}%.`;
+      resultatGlobalElement.textContent = `Tu es kong à ${pourcentageGlobal.toFixed(0)}%.`;
   
       const resultatsCategorieElement = document.getElementById('resultatsCategorie');
       resultatsCategorieElement.innerHTML = '';
@@ -26,16 +26,14 @@ function calculerPourcentage() {
         'D': 'Kong beauf',
         'E': 'Kongpétiteur',
         'F': 'Mécakong',
+        'PasKong': 'Pas kong',
       };
   
-      // Ajouter une catégorie "pas kong"
-      nomsCategories['PasKong'] = 'Pas kong';
-  
       for (const categorie in nomsCategories) {
-        const pourcentageCategorie = (categories[categorie] || 0) / totalDePhrases * 100;
+        const pourcentageCategorie = Math.ceil((categories[categorie] || 0) / totalDePhrases * 100);
         const nomCategorie = nomsCategories[categorie];
         const paragraphe = document.createElement('p');
-        paragraphe.textContent = `Tu es ${nomCategorie} à ${pourcentageCategorie.toFixed(2)}%.`;
+        paragraphe.textContent = `Tu es ${nomCategorie} à ${pourcentageCategorie.toFixed(0)}%.`;
         resultatsCategorieElement.appendChild(paragraphe);
       }
   
