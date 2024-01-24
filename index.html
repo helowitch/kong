@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
   <title>Mon Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div id="test-container">
-    <!-- Liste de phrases à cocher -->
-    <label><input type="checkbox" id="phrase1"> Phrase 1</label>
-    <label><input type="checkbox" id="phrase2"> Phrase 2</label>
+    <!-- Ajoute des catégories à chaque phrase -->
+    <label><input type="checkbox" id="phrase1" data-categorie="A"> Phrase 1</label>
+    <label><input type="checkbox" id="phrase2" data-categorie="B"> Phrase 2</label>
     <!-- Ajoute d'autres phrases à ta convenance -->
 
     <!-- Bouton pour calculer le pourcentage -->
@@ -18,6 +19,8 @@
 
     <!-- Affichage du résultat -->
     <div id="resultat"></div>
+    <!-- Ajout d'un élément pour le diagramme en cercle -->
+    <div id="diagramme"></div>
   </div>
 
   <script src="script.js"></script>
