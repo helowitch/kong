@@ -28,24 +28,46 @@ function calculerPourcentage() {
     // Construire le texte résultat global
     const resultatGlobalElement = document.getElementById('resultatGlobal');
     if (Object.keys(categories).length > 0) {
-      resultatGlobalElement.textContent = `Tu es ${getNomCategorie(Object.keys(categories)[0])} à ${pourcentageGlobal.toFixed(2)}%.`;
+      resultatGlobalElement.textContent = `Tu es kong à ${pourcentageGlobal.toFixed(2)}%.`;
+  
+      // Construire le texte résultat par catégorie
+      const resultatsCategorieElement = document.getElementById('resultatsCategorie');
+      resultatsCategorieElement.innerHTML = '';
+      for (const categorie in categories) {
+        const pourcentageCategorie = (categories[categorie] / totalDePhrases) * 100;
+        const nomCategorie = getNomCategorie(categorie);
+        const paragraphe = document.createElement('p');
+        paragraphe.textContent = `Tu es ${nomCategorie} à ${pourcentageCategorie.toFixed(2)}%.`;
+        resultatsCategorieElement.appendChild(paragraphe);
+      }
+  
+      // Afficher le diagramme en cercle
+      afficherDiagramme(categories);
     } else {
       resultatGlobalElement.textContent = "Tu n'es pas kong du tout... quel modèle de pureté !";
+      // Effacer les résultats par catégorie et le diagramme en l'absence de coche
+      document.getElementById('resultatsCategorie').innerHTML = '';
+      const diagrammeElement = document.getElementById('diagramme');
+      if (diagrammeElement instanceof HTMLCanvasElement) {
+        const context = diagrammeElement.getContext('2d');
+        context.clearRect(0, 0, diagrammeElement.width, diagrammeElement.height);
+      }
     }
+  }
   
-    // Construire le texte résultat par catégorie
-    const resultatsCategorieElement = document.getElementById('resultatsCategorie');
-    resultatsCategorieElement.innerHTML = '';
-    for (const categorie in categories) {
-      const pourcentageCategorie = (categories[categorie] / totalDePhrases) * 100;
-      const nomCategorie = getNomCategorie(categorie);
-      const paragraphe = document.createElement('p');
-      paragraphe.textContent = `Tu es ${nomCategorie} à ${pourcentageCategorie.toFixed(2)}%.`;
-      resultatsCategorieElement.appendChild(paragraphe);
-    }
+  // Fonction pour obtenir le nom de la catégorie correspondante
+  function getNomCategorie(categorie) {
+    const nomsCategories = {
+      'A': 'Kong show',
+      'B': 'Kong des cavernes',
+      'C': 'Kong strong',
+      'D': 'Kong beauf',
+      'E': 'Kongpétiteur',
+      'F': 'Mécakong',
+      // Ajoute d'autres catégories au besoin
+    };
   
-    // Afficher le diagramme en cercle (ou une liste)
-    afficherDiagramme(categories);
+    return nomsCategories[categorie] || 'Inconnu';
   }
   
   function afficherDiagramme(pourcentages) {
@@ -78,20 +100,5 @@ function calculerPourcentage() {
       data: data,
       options: options,
     });
-  }
-  
-  // Fonction pour obtenir le nom de la catégorie correspondante
-  function getNomCategorie(categorie) {
-    const nomsCategories = {
-      'A': 'Kong show',
-      'B': 'Kong des cavernes',
-      'C': 'Kong strong',
-      'D': 'Kong beauf',
-      'E': 'Kongpétiteur',
-      'F': 'Mécakong',
-      // Ajoute d'autres catégories au besoin
-    };
-  
-    return nomsCategories[categorie] || 'Inconnu';
   }
   
