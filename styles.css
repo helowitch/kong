@@ -25,7 +25,7 @@ body {
   }
 
 
-  #diagramme {
+  .canvas-container {
     max-width: 150px; /* Ajuste la largeur selon tes besoins */
     height: auto; /* Pour maintenir les proportions */
     margin-left: 0; /* Aligné à gauche */
