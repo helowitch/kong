@@ -52,6 +52,12 @@ function calculerPourcentage() {
   
   function afficherDiagramme(pourcentages) {
     const diagrammeElement = document.getElementById('diagramme');
+  
+    // Vérifie si l'élément est un élément <canvas>
+    if (!(diagrammeElement instanceof HTMLCanvasElement)) {
+      console.error('L\'élément du diagramme n\'est pas un élément <canvas>.');
+      return;
+    }
     
     // Crée un tableau pour stocker les données du diagramme
     const data = {
