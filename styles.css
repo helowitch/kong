@@ -23,4 +23,9 @@ body {
     margin-top: 20px;
     font-weight: bold;
   }
+
+  #diagramme {
+    width: 400px; /* Ajuste la largeur selon tes besoins */
+    height: 400px; /* Ajuste la hauteur selon tes besoins */
+  }
   
