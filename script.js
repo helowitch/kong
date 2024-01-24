@@ -16,8 +16,8 @@ function calculerPourcentage() {
   
       const resultatsCategorieElement = document.getElementById('resultatsCategorie');
       resultatsCategorieElement.innerHTML = '';
-      
-      // Catégories existantes
+  
+      // Trouver les deux catégories principales
       const nomsCategories = {
         'A': 'Kong show',
         'B': 'Kong des cavernes',
@@ -27,15 +27,13 @@ function calculerPourcentage() {
         'F': 'Mécakong',
       };
   
-      const totalCategories = Object.values(categories).reduce((total, valeur) => total + valeur, 0);
+      const categoriesTriees = Object.entries(categories).sort((a, b) => b[1] - a[1]);
+      const deuxCategoriesPrincipales = categoriesTriees.slice(0, 2).map(cat => nomsCategories[cat[0]]);
   
-      for (const categorie in nomsCategories) {
-        const pourcentageCategorie = Math.floor((categories[categorie] || 0) / totalCategories * 100);
-        const nomCategorie = nomsCategories[categorie];
-        const paragraphe = document.createElement('p');
-        paragraphe.textContent = `Tu es ${nomCategorie} à ${pourcentageCategorie.toFixed(0)}%.`;
-        resultatsCategorieElement.appendChild(paragraphe);
-      }
+      // Afficher les deux catégories principales
+      const phrasePrincipales = document.createElement('p');
+      phrasePrincipales.textContent = `À l'intérieur de toi, il y a deux principaux kongs : ${deuxCategoriesPrincipales.join(' et ')}.`;
+      resultatsCategorieElement.appendChild(phrasePrincipales);
   
       // Afficher le diagramme en cercle
       afficherDiagramme(categories);
