@@ -35,6 +35,38 @@ function calculerPourcentage() {
     // Afficher le diagramme en cercle (ou une liste)
     afficherDiagramme(categories);
   }
+
+  function afficherDiagramme(pourcentages) {
+  const diagrammeElement = document.getElementById('diagramme');
+
+  // Vérifie si l'élément est un élément <canvas>
+  if (!(diagrammeElement instanceof HTMLCanvasElement)) {
+    console.error('L\'élément du diagramme n\'est pas un élément <canvas>.');
+    return;
+  }
+
+  // Crée un tableau pour stocker les données du diagramme
+  const data = {
+    labels: Object.keys(pourcentages),
+    datasets: [{
+      data: Object.values(pourcentages),
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', /* ... Ajoute des couleurs ... */],
+    }],
+  };
+
+  // Options du diagramme
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+
+  // Crée un objet de type Doughnut (diagramme en cercle)
+  const myDoughnutChart = new Chart(diagrammeElement, {
+    type: 'doughnut',
+    data: data,
+    options: options,
+  });
+}
   
   function afficherDiagramme(pourcentages) {
     const diagrammeElement = document.getElementById('diagramme');

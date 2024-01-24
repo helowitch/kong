@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Mon Test</title>
+  <title>Théorie des kongs</title>
+  <!-- Ajoute le lien vers Chart.js via CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.js" async></script>
   <script src="script.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="test-container">
-    <!-- Ajoute des catégories à chaque phrase -->
-    <label><input type="checkbox" id="phrase1" data-categorie="A"> Phrase 1</label>
-    <label><input type="checkbox" id="phrase2" data-categorie="B"> Phrase 2</label>
-    <!-- Ajoute d'autres phrases à ta convenance -->
+  <h1>Théorie des kongs</h1>
 
-    <!-- Bouton pour calculer le pourcentage -->
-    <button onclick="calculerPourcentage()">Calculer le Pourcentage</button>
+  <!-- Ajoute un paragraphe pour afficher les résultats par catégorie -->
+  <div id="resultatsCategorie"></div>
 
-    <!-- Affichage du résultat -->
-    <div id="resultat"></div>
-    <!-- Ajout d'un élément pour le diagramme en cercle -->
-    <canvas id="diagramme"></canvas>
-  </div>
+  <!-- Ajoute le paragraphe pour afficher le résultat global -->
+  <p id="resultat"></p>
+
+  <!-- Ajoute l'élément canvas pour le diagramme -->
+  <canvas id="diagramme"></canvas>
 
 </body>
 </html>
