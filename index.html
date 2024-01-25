@@ -12,7 +12,8 @@
   <script src="script.js"></script>
 </head>
 <body>
-  <h1>Théorie des kongs</h1>
+  <h1>Quel kong es-tu ?</h1>
+  <p>Coche chaque phrase qui te correspond !</p>
 
   <!-- Phrases à cocher -->
   <div>
@@ -501,7 +502,12 @@
         <input type="checkbox" data-categorie="D">
         Je suis déjà allé·e à un salon de l'érotisme
      </label>
-                              
+                                     
+     <label>
+      <input type="checkbox" data-categorie="F">
+      J'ai déjà comparé une femme à une voiture
+   </label>
+                         
      <label>
         <input type="checkbox" data-categorie="E">
         J'ai menti au moins une fois sur ce test car j'assumais pas ma réponse
@@ -521,6 +527,9 @@
   <!-- Ajoute l'élément canvas pour le diagramme -->
   <div class="canvas-container">
   <canvas id="diagramme"></canvas>
+
+    <!-- Ajouter un élément pour afficher la description -->
+    <div id="descriptionCategorie" style="margin-top: 20px;"></div>
 </div>
 </body>
 </html>
