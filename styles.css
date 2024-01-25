@@ -39,5 +39,32 @@ body {
     margin-left: 0; /* Aligné à gauche */
     margin-top: 20px; /* Espacement en haut, ajuste selon tes besoins */
   }
+
+  #descriptionCategorie {
+    margin-top: 20px;
+    padding: 16px;
+  }
   
+  .kong-show-description {
+    background-color: #FF6384;
+  }
+    
+  .kong-des-cavernes-description {
+    background-color: #36A2EB;
+  }
+     
+  .kong-strong-description {
+    background-color: #FFCE56;
+  }   
+
+  .kong-beauf-description {
+    background-color: #4CAF50;
+  }   
+
+  .kongpetiteur-description {
+    background-color: #FF5733;
+  }   
   
+  .mecakong-description {
+    background-color: #9B59B6;
+  }
