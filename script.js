@@ -105,6 +105,7 @@ function getNomCategorie(categorie) {
   return nomsCategories[categorie] || 'Inconnu';
 }
 
+
 function afficherDescriptionCategorie(categorie) {
   const descriptions = {
     'Kong show': 'Tu casses trop les couilles car tu fais trop de bruit et tu prends trop de place. Tel un chad de lycée américain, tu fais partie des Alpha Kong qui se donnent en spectacle. Mais les gens t\'admirent en secret. Tu es celui ou celle qui ne cache pas son singe intérieur.',
@@ -117,7 +118,25 @@ function afficherDescriptionCategorie(categorie) {
   };
 
   const descriptionElement = document.getElementById('descriptionCategorie');
+  const couleur = getCouleurCategorie(categorie);
+
   if (descriptionElement) {
     descriptionElement.textContent = descriptions[categorie] || 'Description non disponible.';
+    descriptionElement.style.backgroundColor = couleur;
   }
 }
+
+function getCouleurCategorie(categorie) {
+  const couleursCategories = {
+    'Kong show': '#FF6384',
+    'Kong des cavernes': '#36A2EB',
+    'Kong strong': '#FFCE56',
+    'Kong beauf': '#4CAF50',
+    'Kongpétiteur': '#FF5733',
+    'Mécakong': '#9B59B6',
+    'Inconnu': '#C0C0C0',
+  };
+
+  return couleursCategories[categorie] || '#C0C0C0';
+}
+
