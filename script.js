@@ -98,15 +98,32 @@ function afficherDiagramme(pourcentages) {
   return myDoughnutChart;
 }
 
-function getColorForCategory(categorie) {
-  const colorsMapping = {
-    'Kong show': '#FF6384',
-    'Kong des cavernes': '#36A2EB',
-    'Kong strong': '#FFCE56',
-    'Kong beauf': '#4CAF50',
-    'Kongpétiteur': '#FF5733',
-    'Mécakong': '#9B59B6',
+function getNomCategorie(categorie) {
+  const nomsCategories = {
+    'A': 'Kong show',
+    'B': 'Kong des cavernes',
+    'C': 'Kong strong',
+    'D': 'Kong beauf',
+    'E': 'Kongpétiteur',
+    'F': 'Mécakong',
   };
 
-  return colorsMapping[categorie] || '#C0C0C0'; // Couleur par défaut
+  return nomsCategories[categorie] || 'Inconnu';
+}
+
+function afficherDescriptionCategorie(categorie) {
+  const descriptions = {
+    'Kong show': 'Tu casses trop les couilles car tu fais trop de bruit et tu prends trop de place. Tel un chad de lycée américain, tu fais partie des Alpha Kong qui se donnent en spectacle. Mais les gens t\'admirent en secret. Tu es celui ou celle qui ne cache pas son singe intérieur.',
+    'Kong des cavernes': 'Tu reviens littéralement à tes racines de singe car tu cèdes à tes pulsions innées. Tu as laissé tomber ton cerveau mais tu t\'amuses dans ton petit monde. Tu restes quand même un Beta Kong.',
+    'Kong strong': '💪🔥 LES MUSCLES 🤜💥 LA CASTAGNE. Tu veux être le plus gros singe du groupe et montrer que t\'es le plus fort. Tu fais partie des Alpha Kong. N\'oublie pas qu\'il y a sûrement un petit coeur derrière cette montagne de muscles...',
+    'Kong beauf': 'Littéralement l\'oncle gênant, tu es le singe Bigard, un gros Beta Kong, mais sûrement le singe le plus répandu. Il te faut juste le bon public pour être aimé·e tel·le que tu es.',
+    'Kongpétiteur': 'A l\'intérieur de toi tu sais que tu es le plus fort des singes. Mais personne ne semble le remarquer. Tu ne veux pas d\'ami·e·s. Tu veux juste mettre une vitesse à tout le monde, comme le Sigma Kong que tu es.',
+    'Mécakong': 'Vroummmmm vroummmm breuummmm breummm vroum... ces mots résonnent en toi comme du miel divin. Tu aimes lustrer ton véhicule et humer la douce odeur du pot d\'échappement... Tu trouves qu\'un V8 est plus beau que Henry Cavill et tu l\'assumes. Vive les gros vroum, merde.',
+    'Inconnu': 'Description inconnue...',
+  };
+ 
+  const descriptionElement = document.getElementById('descriptionCategorie');
+  if (descriptionElement) {
+    descriptionElement.textContent = descriptions[categorie] || 'Description non disponible.';
+  }
 }
