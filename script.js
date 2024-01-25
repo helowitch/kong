@@ -127,3 +127,16 @@ function afficherDescriptionCategorie(categorie) {
     descriptionElement.textContent = descriptions[categorie] || 'Description non disponible.';
   }
 }
+
+function getColorForCategory(categorie) {
+  const colorsMapping = {
+    'Kong show': '#FF6384',
+    'Kong des cavernes': '#36A2EB',
+    'Kong strong': '#FFCE56',
+    'Kong beauf': '#4CAF50',
+    'Kongpétiteur': '#FF5733',
+    'Mécakong': '#9B59B6',
+  };
+
+  return colorsMapping[categorie] || '#C0C0C0'; // Couleur par défaut
+}
