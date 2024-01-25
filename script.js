@@ -48,17 +48,29 @@ function calculerPourcentage() {
   }
 }
 
- // Écouteur d'événement sur le clic de chaque section du diagramme
- const diagrammeElement = document.getElementById('diagramme');
- diagrammeElement.addEventListener('click', (event) => {
-   const activeElement = myDoughnutChart.getElementAtEvent(event)[0];
+// Déclarer myDoughnutChart en dehors de la fonction afficherDiagramme
+let myDoughnutChart;
 
-   if (activeElement) {
-     // Récupérer la catégorie de la section cliquée
-     const categorie = myDoughnutChart.data.labels[activeElement._index];
-     afficherDescriptionCategorie(categorie);
-   }
- });
+function calculerPourcentage() {
+  // ... (votre code existant)
+
+  // Afficher le diagramme en cercle
+  myDoughnutChart = afficherDiagramme(categories);
+}
+
+// Écouteur d'événement sur le clic de chaque section du diagramme
+const diagrammeElement = document.getElementById('diagramme');
+diagrammeElement.addEventListener('click', (event) => {
+  if (myDoughnutChart) {
+    const activeElement = myDoughnutChart.getElementAtEvent(event)[0];
+
+    if (activeElement) {
+      // Récupérer la catégorie de la section cliquée
+      const categorie = myDoughnutChart.data.labels[activeElement._index];
+      afficherDescriptionCategorie(categorie);
+    }
+  }
+});
 
 
 function afficherDiagramme(pourcentages) {
