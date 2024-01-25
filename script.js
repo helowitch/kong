@@ -1,3 +1,5 @@
+let myDoughnutChart; // Déclarer myDoughnutChart en dehors de la fonction afficherDiagramme
+
 function calculerPourcentage() {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   const categories = {};
@@ -36,7 +38,7 @@ function calculerPourcentage() {
     resultatsCategorieElement.appendChild(phrasePrincipales);
 
     // Afficher le diagramme en cercle
-    afficherDiagramme(categories);
+    myDoughnutChart = afficherDiagramme(categories);
   } else {
     resultatGlobalElement.textContent = "Tu n'es pas kong du tout... quel modèle de pureté !";
     document.getElementById('resultatsCategorie').innerHTML = '';
@@ -46,16 +48,6 @@ function calculerPourcentage() {
       context.clearRect(0, 0, diagrammeElement.width, diagrammeElement.height);
     }
   }
-}
-
-// Déclarer myDoughnutChart en dehors de la fonction afficherDiagramme
-let myDoughnutChart;
-
-function calculerPourcentage() {
-  // ... (votre code existant)
-
-  // Afficher le diagramme en cercle
-  myDoughnutChart = afficherDiagramme(categories);
 }
 
 // Écouteur d'événement sur le clic de chaque section du diagramme
@@ -72,7 +64,6 @@ diagrammeElement.addEventListener('click', (event) => {
   }
 });
 
-
 function afficherDiagramme(pourcentages) {
   const diagrammeElement = document.getElementById('diagramme');
 
@@ -80,7 +71,7 @@ function afficherDiagramme(pourcentages) {
     console.error('L\'élément du diagramme n\'est pas un élément <canvas>.');
     return;
   }
-  
+
   const data = {
     labels: Object.keys(pourcentages).map(categorie => getNomCategorie(categorie)),
     datasets: [{
@@ -94,7 +85,7 @@ function afficherDiagramme(pourcentages) {
     maintainAspectRatio: false,
   };
 
-  const myDoughnutChart = new Chart(diagrammeElement, {
+  return new Chart(diagrammeElement, {
     type: 'doughnut',
     data: data,
     options: options,
@@ -124,9 +115,9 @@ function afficherDescriptionCategorie(categorie) {
     'Mécakong': 'Vroummmmm vroummmm breuummmm breummm vroum... ces mots résonnent en toi comme du miel divin. Tu aimes lustrer ton véhicule et humer la douce odeur du pot d\'échappement... Tu trouves qu\'un V8 est plus beau que Henry Cavill et tu l\'assumes. Vive les gros vroum, merde.',
     'Inconnu': 'Description inconnue...',
   };
- 
+
   const descriptionElement = document.getElementById('descriptionCategorie');
   if (descriptionElement) {
     descriptionElement.textContent = descriptions[categorie] || 'Description non disponible.';
   }
- }
+}
